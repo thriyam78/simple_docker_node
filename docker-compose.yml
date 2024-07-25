@@ -1,0 +1,19 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    environment:
+      - MONGO_URI=mongodb+srv://thriyam:Q7Pmhp8bX68w80aJ@cluster0.sqaobzr.mongodb.net/docker_node?retryWrites=true&w=majority&appName=Cluster0
+    ports:
+      - "3000:3000"
+
+  frontend:
+    image: nginx:alpine
+    container_name: frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./frontend/default.conf:/etc/nginx/conf.d/default.conf:ro
